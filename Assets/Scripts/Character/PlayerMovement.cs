@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
 {
     public CharacterController controller;
-    private bool isInitialPositionSet = false;
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity = 0.1f;
     public Animator animator;
@@ -40,7 +39,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
     public bool isRolling = false; // Флаг переката
     CharacterStats stats;
     public float runJumpMultiplier = 2.0f; // Добавим новый множитель для прыжка при беге
-    public Transform PlayerPosition;
     static PlayerMovement instance;
 
     private void OnEnable()
@@ -63,8 +61,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        isInitialPositionSet = false;
-        SetInitialPosition();
     }
 
     private void Awake()
@@ -194,9 +190,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
 
     public void LoadData(GameData data)
     {
-        if (controller != null)
+        if (controller != null && data.Level == "Level2")
         {
-            Vector3 loadedPosition = new Vector3(data.PlayerPosX, data.PlayerPosY, data.PlayerPosZ);
+            Vector3 loadedPosition = data.playerPosition;
             controller.enabled = false;
             transform.position = loadedPosition;
             controller.enabled = true;
@@ -211,10 +207,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
     {
         if (controller != null)
         {
-            data.PlayerPosX = transform.position.x;
-            data.PlayerPosY = transform.position.y;
-            data.PlayerPosZ = transform.position.z;
-
             data.Level = SceneManager.GetActiveScene().name;
         }
         else
@@ -223,28 +215,27 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
         }
     }
 
-    private void SetInitialPosition()
-    {
-        if (isInitialPositionSet) return;
+    // private void SetInitialPosition()
+    // {
+    //     if (isInitialPositionSet) return;
 
-        string currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log("Current Scene: " + currentScene);
+    //     string currentScene = SceneManager.GetActiveScene().name;
+    //     Debug.Log("Current Scene: " + currentScene);
 
-        // Set initial position based on scene
-        switch (currentScene)
-        {
-            case "Level1":
-                transform.position = new Vector3(-27.1f, 0.2f, -34.2f);
-                Debug.Log("Position set for Level1");
-                break;
-            case "Level2":
-                transform.position = new Vector3(125.9f, 12.7f, 178.3f);
-                Debug.Log("Position set for Level2");
-                break;
-        }
+    //     switch (currentScene)
+    //     {
+    //         case "Level1":
+    //             transform.position = new Vector3(-27.1f, 0.2f, -34.2f);
+    //             Debug.Log("Position set for Level1");
+    //             break;
+    //         case "Level2":
+    //             transform.position = new Vector3(125.9f, 12.7f, 178.3f);
+    //             Debug.Log("Position set for Level2");
+    //             break;
+    //     }
 
-        Debug.Log("Player position: " + transform.position);
+    //     Debug.Log("Player position: " + transform.position);
 
-        isInitialPositionSet = true;
-    }
+    //     isInitialPositionSet = true;
+    // }
 }

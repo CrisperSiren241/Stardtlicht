@@ -1067,6 +1067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 467128976701593100, guid: 6e1a1dbe233151c4689e74ed37a859a2,
         type: 3}
+      propertyPath: questId
+      value: SolvePuzzles
+      objectReference: {fileID: 0}
+    - target: {fileID: 467128976701593100, guid: 6e1a1dbe233151c4689e74ed37a859a2,
+        type: 3}
       propertyPath: assignedQuestInfo
       value: 
       objectReference: {fileID: 11400000, guid: a4b1a9d1693377b44a217210a266d334,

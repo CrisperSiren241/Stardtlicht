@@ -181,7 +181,7 @@ public class QuestManager : MonoBehaviour
         try
         {
             // load quest from saved data
-            if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState)
+            if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState && false)
             {
                 string serializedData = PlayerPrefs.GetString(questInfo.id);
                 QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);

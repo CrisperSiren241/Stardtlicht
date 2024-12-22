@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ReachDestinationStep : QuestStep
 {
+    void Start()
+    {
+        UpdateState();
+    }
     private void OnEnable()
     {
         GameEventsManager.instance.miscEvents.onDestinationReached += ReachDestination;
@@ -23,4 +27,12 @@ public class ReachDestinationStep : QuestStep
     {
         throw new System.NotImplementedException();
     }
+
+    private void UpdateState()
+    {
+        string state = "";
+        string status = "Неподалеку есть испытательный полигон. Пройдите его";
+        ChangeState(state, status);
+    }
+
 }

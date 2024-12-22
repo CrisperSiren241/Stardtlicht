@@ -24,6 +24,14 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
     }
 
+    void Update()
+    {
+        if (playerMovement.isDialogueActive && Input.GetKeyDown(KeyCode.Return))
+        {
+            NextSentence();
+        }
+    }
+
     private Dialogue currentDialogue;
 
     public void StartDialogue(Dialogue dialogue)
@@ -107,7 +115,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowCompletionDialogue(Dialogue dialogue)
     {
-        //playerMovement.isDialogueActive = true;
+        playerMovement.isDialogueActive = true;
         dialogueBox.SetActive(true);
         nameText.text = dialogue.name;
         sentences.Clear();

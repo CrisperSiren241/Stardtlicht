@@ -11,7 +11,6 @@ public class QuestLogUI : MonoBehaviour
     [SerializeField] private GameObject contentParent;
     [SerializeField] private TextMeshProUGUI questDisplayNameText;
     [SerializeField] private TextMeshProUGUI questStatusText;
-    [SerializeField] private TextMeshProUGUI questRequirementsText;
 
     private Button firstSelectedButton;
 
@@ -61,27 +60,26 @@ public class QuestLogUI : MonoBehaviour
     private void QuestStateChange(Quest quest)
     {
         // add the button to the scrolling list if not already added
-
         SetQuestLogInfo(quest);
+
         // initialize the first selected button if not already so that it's
         // always the top button
 
+
+        // set the button color based on quest state
     }
 
     private void SetQuestLogInfo(Quest quest)
     {
         // quest name
-        questDisplayNameText.text = quest.info.displayName;
-
+        if (quest.state == QuestState.IN_PROGRESS)
+        {
+            questDisplayNameText.text = quest.info.displayName;
+        }
         // status
         questStatusText.text = quest.GetFullStatusText();
 
         // requirements
-        questRequirementsText.text = "";
-        foreach (QuestInfoSO prerequisiteQuestInfo in quest.info.questPrerequisites)
-        {
-            questRequirementsText.text += prerequisiteQuestInfo.displayName + "\n";
-        }
 
         // rewards
     }
