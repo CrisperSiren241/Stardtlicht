@@ -3866,6 +3866,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 533654a8aeb865d4c966560ef0f91323, type: 3}
+--- !u!114 &582971957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 926382459830852933, guid: 533654a8aeb865d4c966560ef0f91323,
+    type: 3}
+  m_PrefabInstance: {fileID: 582971956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc42de63812066e40a51103de37700ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &589153417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11650,7 +11662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0f2218619737c459dcf012409096bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnID: DefaultSpawn
 --- !u!1001 &1743300960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14842,6 +14853,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ebe8a69d5eb21f7439de80ee2f4428f3,
         type: 2}
+    - target: {fileID: 1422000493568066941, guid: 6e1a1dbe233151c4689e74ed37a859a2,
+        type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 582971957}
     - target: {fileID: 6312773016531379977, guid: 6e1a1dbe233151c4689e74ed37a859a2,
         type: 3}
       propertyPath: freeLookCamera

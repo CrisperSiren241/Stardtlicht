@@ -28,4 +28,11 @@ public class PlayerEvents
             onPlayerLevelChange(level);
         }
     }
+
+    public event Action onPlayerDeath;
+    public void PlayerDeath(){
+        if(onPlayerDeath != null){
+            onPlayerDeath();
+        }
+    }
 }

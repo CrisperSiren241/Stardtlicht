@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
             return;
         }
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnDestroy()
@@ -92,7 +91,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
     {
         if (stats.isDead)
         {
-            controller.enabled = false;
+            playerVelocity.y += gravity * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
             return;
         }
 
@@ -100,8 +100,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistenceManager
         {
             return;
         }
-
-        Vector3 playerPosition = transform.position;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("isGrounded", isGrounded);

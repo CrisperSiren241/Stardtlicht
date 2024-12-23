@@ -85,6 +85,7 @@ public class CharacterStats : MonoBehaviour
         Debug.Log("Персонаж умер.");
         animator.SetTrigger("Death");
         isDead = true;
+        GameEventsManager.instance.playerEvents.PlayerDeath();
     }
 
     private IEnumerator StopHealingAnimationAfterDelay(float delay)
@@ -100,5 +101,9 @@ public class CharacterStats : MonoBehaviour
         {
             animator.SetLayerWeight(layerIndex, weight);
         }
+    }
+
+    public void ResetHealth(){
+        currentHealth = maxHealth;        
     }
 }
