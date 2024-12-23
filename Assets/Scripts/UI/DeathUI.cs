@@ -28,16 +28,20 @@ public class DeathUI : MonoBehaviour, IDataPersistenceManager
 
     void DisplayPanel()
     {
+        if (PauseMenu.isAnyMenuOpen) return; 
         deathUI.SetActive(true);
         CameraService.Instance.Lock();
+        PauseMenu.isAnyMenuOpen = true; 
     }
+
     public void Restart()
     {
         stats.isDead = false;
-        stats.currentHealth = stats.maxHealth; // Полностью восстанавливаем здоровье
+        stats.currentHealth = stats.maxHealth;
         CameraService.Instance.UnLock();
+        deathUI.SetActive(false); 
+        PauseMenu.isAnyMenuOpen = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
     }
 
     public void SaveData(GameData data) { }

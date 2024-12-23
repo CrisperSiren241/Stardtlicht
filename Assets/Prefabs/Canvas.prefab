@@ -1339,7 +1339,7 @@ GameObject:
   - component: {fileID: 324245365103312882}
   - component: {fileID: 4561245417649531118}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Resume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1446,7 +1446,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 324245365103312882}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1058583155055886081}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7544711846005015743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1606,7 @@ GameObject:
   - component: {fileID: 831485946454768542}
   - component: {fileID: 1472761549025900040}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: toMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1701,7 +1713,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 831485946454768542}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1058583155055886081}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: toMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8328667962442575590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2008,7 @@ GameObject:
   - component: {fileID: 6312773016531379977}
   - component: {fileID: 191808324033064084}
   - component: {fileID: 1422000493568066941}
+  - component: {fileID: 1058583155055886081}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2123,3 +2148,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   deathUI: {fileID: 2424754592284224331}
+--- !u!114 &1058583155055886081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882238290284694826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10194a90db4c0a54dbfe26a60cf6963a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 0}
