@@ -7,6 +7,7 @@ public class GameData
 {
     public Vector3 playerPosition;
     public SerializableDictionary<string, bool> keysCollected;
+    public SerializableDictionary<string, bool> bridgeUp;
     public string Level;
 
     // the values defined in this constructor will be the default values

@@ -50,9 +50,21 @@ public class PauseMenu : MonoBehaviour
 
     public void toMainMenu()
     {
+        // Проверяем, существует ли QuestManager, и сохраняем квесты
+        if (QuestManager.Instance != null)
+        {
+            foreach (Quest quest in QuestManager.Instance.questMap.Values)
+            {
+                QuestManager.Instance.SaveQuest(quest);
+            }
+        }
+
+        // Возвращаем время в нормальный режим
         GameIsPaused = false;
         Time.timeScale = 1f;
-        
+
+        // Переход на сцену главного меню
         SceneManager.LoadSceneAsync("Menu");
     }
+
 }

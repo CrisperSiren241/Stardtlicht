@@ -28,19 +28,27 @@ public class DeathUI : MonoBehaviour, IDataPersistenceManager
 
     void DisplayPanel()
     {
-        if (PauseMenu.isAnyMenuOpen) return; 
+        if (PauseMenu.isAnyMenuOpen) return;
         deathUI.SetActive(true);
         CameraService.Instance.Lock();
-        PauseMenu.isAnyMenuOpen = true; 
+        PauseMenu.isAnyMenuOpen = true;
     }
 
     public void Restart()
     {
+        DataPersistenceManager.instance.SaveGame();   
         stats.isDead = false;
         stats.currentHealth = stats.maxHealth;
         CameraService.Instance.UnLock();
-        deathUI.SetActive(false); 
+        deathUI.SetActive(false);
         PauseMenu.isAnyMenuOpen = false;
+        if (QuestManager.Instance != null)
+        {
+            foreach (Quest quest in QuestManager.Instance.questMap.Values)
+            {
+                QuestManager.Instance.SaveQuest(quest);
+            }
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

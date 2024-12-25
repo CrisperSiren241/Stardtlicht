@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class TriggerPuzzle : MonoBehaviour
+public class TriggerPuzzle : MonoBehaviour, IDataPersistenceManager
 {
     public GameObject puzzleCanvas;
     public string questId;
     private bool isPlayerInTrigger;
+    private bool isSolved = false;
 
     void Update()
     {
@@ -32,4 +33,15 @@ public class TriggerPuzzle : MonoBehaviour
         CameraService.Instance.Lock();
         PauseMenu.isAnyMenuOpen = true;
     }
+
+    public void LoadData(GameData data)
+    {
+        CollectibleItem item = GetComponent<CollectibleItem>();
+        data.keysCollected.TryGetValue(item.id, out isSolved);
+        if (isSolved)
+        {
+            Destroy(puzzleCanvas);
+        }
+    }
+    public void SaveData(GameData data) { }
 }

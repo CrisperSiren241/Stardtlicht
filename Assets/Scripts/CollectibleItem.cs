@@ -6,7 +6,7 @@ using static InterfaceScript;
 public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceManager
 {
 
-    [SerializeField] private string id;
+    [SerializeField] public string id;
 
     [ContextMenu("Generate guid for id")]
     private void GenerateGuid()
@@ -14,7 +14,7 @@ public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceMan
         id = System.Guid.NewGuid().ToString();
     }
 
-    private bool collected = false;
+    public bool collected = false;
 
     public void Interact()
     {
@@ -28,9 +28,10 @@ public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceMan
             collected = true;
             PauseMenu.isAnyMenuOpen = false;
             Debug.Log("IsSolved");
+            DataPersistenceManager.instance.SaveGame();
         }
-
     }
+
 
     public void OnFocused() { }
     public void OnDefocused() { }
@@ -46,24 +47,26 @@ public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceMan
 
     public void LoadData(GameData data)
     {
-        data.keysCollected.TryGetValue(id, out collected);
-        if (collected)
+        if (data.keysCollected.TryGetValue(id, out bool value))
         {
-            Destroy(gameObject);
+            collected = value; // Присваиваем сохранённое значение
+        }
+        else
+        {
+            Debug.LogWarning($"No data found for {id}");
         }
     }
+
 
     public void SaveData(GameData data)
     {
         if (data.keysCollected.ContainsKey(id))
         {
             data.keysCollected[id] = collected;
-            Debug.Log("(data.keysCollected.ContainsKey(id))");
         }
         else
         {
             data.keysCollected.Add(id, collected);
-            Debug.Log("data.keysCollected.Add(id, collected)");
 
         }
     }

@@ -13,11 +13,18 @@ public class QuestManager : MonoBehaviour
     // quest start requirements
     private int currentPlayerLevel;
 
+    public static QuestManager Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         questMap = CreateQuestMap();
     }
-
     private void OnEnable()
     {
         GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
@@ -37,6 +44,8 @@ public class QuestManager : MonoBehaviour
         GameEventsManager.instance.questEvents.onQuestStepStateChange -= QuestStepStateChange;
 
     }
+
+    
 
     private void Start()
     {
@@ -155,7 +164,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void SaveQuest(Quest quest)
+    public void SaveQuest(Quest quest)
     {
         try
         {
