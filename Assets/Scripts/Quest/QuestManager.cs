@@ -8,7 +8,7 @@ public class QuestManager : MonoBehaviour
     [Header("Config")]
     [SerializeField] private bool loadQuestState = true;
 
-    private Dictionary<string, Quest> questMap;
+    public Dictionary<string, Quest> questMap;
 
     // quest start requirements
     private int currentPlayerLevel;
@@ -58,11 +58,6 @@ public class QuestManager : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.state = state;
         GameEventsManager.instance.questEvents.QuestStateChange(quest);
-    }
-
-    private void PlayerLevelChange(int level)
-    {
-        currentPlayerLevel = level;
     }
 
     private void Update()
@@ -180,14 +175,12 @@ public class QuestManager : MonoBehaviour
         Quest quest = null;
         try
         {
-            // load quest from saved data
-            if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState && false)
+            if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState)
             {
                 string serializedData = PlayerPrefs.GetString(questInfo.id);
                 QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
                 quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
             }
-            // otherwise, initialize a new quest
             else
             {
                 quest = new Quest(questInfo);
@@ -211,20 +204,18 @@ public class QuestManager : MonoBehaviour
         return QuestState.REQUIREMENTS_NOT_MET;
     }
 
-    public List<Quest> GetAllQuests()
-    {
-        return questMap.Values.ToList<Quest>();
-    }
+    // public List<Quest> GetAllQuests()
+    // {
+    //     return questMap.Values.ToList<Quest>();
+    // }
 
-    public List<Quest> GetCompletedQuests()
-    {
-        return questMap.Values.Where<Quest>(q => (q.state == QuestState.FINISHED) || (q.state == QuestState.CAN_FINISH)).ToList<Quest>();
-    }
+    // public List<Quest> GetCompletedQuests()
+    // {
+    //     return questMap.Values.Where<Quest>(q => (q.state == QuestState.FINISHED) || (q.state == QuestState.CAN_FINISH)).ToList<Quest>();
+    // }
 
-    public List<Quest> GetInProgressQuests()
-    {
-        return questMap.Values.Where<Quest>(q => q.state == QuestState.IN_PROGRESS).ToList<Quest>();
-    }
-
-    
+    // public List<Quest> GetInProgressQuests()
+    // {
+    //     return questMap.Values.Where<Quest>(q => q.state == QuestState.IN_PROGRESS).ToList<Quest>();
+    // }
 }

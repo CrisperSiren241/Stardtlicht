@@ -30,7 +30,7 @@ public class SolvePuzzleStep : QuestStep
         {
             Debug.Log("Added Puzzle");
             puzzleCollected++;
-            UpdateState(); // Добавьте этот вызов здесь
+            UpdateState();
         }
 
         if (puzzleCollected >= puzzleToComplete)
@@ -43,7 +43,7 @@ public class SolvePuzzleStep : QuestStep
     private void UpdateState()
     {
         string state = puzzleCollected.ToString();
-        string status = "Collected " + puzzleCollected + " / " + puzzleToComplete + " puzzles.";
+        string status = "Решено " + puzzleCollected + " из " + puzzleToComplete + " паззлов";
         ChangeState(state, status);
     }
 

@@ -8,10 +8,11 @@ public class DragDrop : MonoBehaviour
     public GameObject objectToDrag;
     public GameObject ObjectDragToPos;
     public float DropDistance = 1.0f;
-
+    
     private bool isLocked = false;
 
     public GameObject puzzleCanvas;
+    public CollectibleItem collectibleItem;
 
     public static int correctDrops = 0;
     public static int totalObjects = 4;
@@ -24,7 +25,9 @@ public class DragDrop : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
-             puzzleCanvas.SetActive(false); // Закрываем Canvas
+             puzzleCanvas.SetActive(false);
+            PauseMenu.isAnyMenuOpen = false;
+            CameraService.Instance.UnLock();
         }
     }
 
@@ -44,13 +47,15 @@ public class DragDrop : MonoBehaviour
             isLocked = true;
             objectToDrag.transform.position = ObjectDragToPos.transform.position;
 
-            correctDrops++; // Увеличиваем счетчик
+            correctDrops++;
 
             if (correctDrops >= totalObjects)
             {
                 GameEventsManager.instance.miscEvents.PuzzleSolved();
                 Debug.Log("Поздравляем! Головоломка решена!");
-                puzzleCanvas.SetActive(false); // Закрываем Canvas
+                collectibleItem.IsSolved();
+                correctDrops = 0;
+                puzzleCanvas.SetActive(false);
                 CameraService.Instance.UnLock();
             }
         }

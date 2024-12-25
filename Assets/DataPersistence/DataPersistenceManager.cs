@@ -19,9 +19,9 @@ public class DataPersistenceManager : MonoBehaviour
 
     public static DataPersistenceManager instance { get; private set; }
 
-    private void Awake() 
+    private void Awake()
     {
-        if (instance != null) 
+        if (instance != null)
         {
             Debug.Log("Found more than one Data Persistence Manager in the scene. Destroying the newest one.");
             Destroy(this.gameObject);
@@ -33,19 +33,19 @@ public class DataPersistenceManager : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    private void OnDisable() 
+    private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
@@ -56,7 +56,7 @@ public class DataPersistenceManager : MonoBehaviour
         SaveGame();
     }
 
-    public void NewGame() 
+    public void NewGame()
     {
         this.gameData = new GameData();
     }
@@ -67,20 +67,20 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameData = dataHandler.Load();
 
         // start a new game if the data is null and we're configured to initialize data for debugging purposes
-        if (this.gameData == null && initializeDataIfNull) 
+        if (this.gameData == null && initializeDataIfNull)
         {
             NewGame();
         }
 
         // if no data can be loaded, don't continue
-        if (this.gameData == null) 
+        if (this.gameData == null)
         {
             Debug.Log("No data was found. A New Game needs to be started before data can be loaded.");
             return;
         }
 
         // push the loaded data to all other scripts that need it
-        foreach (IDataPersistenceManager dataPersistenceObj in dataPersistenceObjects) 
+        foreach (IDataPersistenceManager dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(gameData);
         }
@@ -89,28 +89,30 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveGame()
     {
         // if we don't have any data to save, log a warning here
-        if (this.gameData == null) 
+        if (this.gameData == null)
         {
             Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
             return;
         }
 
         // pass the data to other scripts so they can update it
-        foreach (IDataPersistenceManager dataPersistenceObj in dataPersistenceObjects) 
+        foreach (IDataPersistenceManager dataPersistenceObj in dataPersistenceObjects)
         {
+            Debug.Log($"Saving data for: {dataPersistenceObj}");
             dataPersistenceObj.SaveData(gameData);
         }
+
 
         // save that data to a file using the data handler
         dataHandler.Save(gameData);
     }
 
-    private void OnApplicationQuit() 
+    private void OnApplicationQuit()
     {
         SaveGame();
     }
 
-    private List<IDataPersistenceManager> FindAllDataPersistenceObjects() 
+    private List<IDataPersistenceManager> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistenceManager> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IDataPersistenceManager>();
@@ -118,12 +120,12 @@ public class DataPersistenceManager : MonoBehaviour
         return new List<IDataPersistenceManager>(dataPersistenceObjects);
     }
 
-    public bool HasGameData() 
+    public bool HasGameData()
     {
         return gameData != null;
     }
 
-    public GameData GetGameData() 
+    public GameData GetGameData()
     {
         return gameData;
     }

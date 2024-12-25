@@ -5,6 +5,7 @@ using static InterfaceScript;
 
 public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceManager
 {
+
     [SerializeField] private string id;
 
     [ContextMenu("Generate guid for id")]
@@ -13,15 +14,22 @@ public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceMan
         id = System.Guid.NewGuid().ToString();
     }
 
-    private bool collected = false; // Флаг для отслеживания, собран ли предмет
+    private bool collected = false;
 
     public void Interact()
     {
+
+    }
+
+    public void IsSolved()
+    {
         if (!collected)
         {
-            collected = true; // Помечаем предмет как собранный
-            Destroy(gameObject); // Удаляем предмет из сцены
+            collected = true;
+            PauseMenu.isAnyMenuOpen = false;
+            Debug.Log("IsSolved");
         }
+
     }
 
     public void OnFocused() { }
@@ -47,14 +55,16 @@ public class CollectibleItem : MonoBehaviour, IInteractable, IDataPersistenceMan
 
     public void SaveData(GameData data)
     {
-        // Обновляем или добавляем статус предмета
         if (data.keysCollected.ContainsKey(id))
         {
-            data.keysCollected[id] = collected; // Обновляем значение
+            data.keysCollected[id] = collected;
+            Debug.Log("(data.keysCollected.ContainsKey(id))");
         }
         else
         {
-            data.keysCollected.Add(id, collected); // Добавляем новый ключ
+            data.keysCollected.Add(id, collected);
+            Debug.Log("data.keysCollected.Add(id, collected)");
+
         }
     }
 

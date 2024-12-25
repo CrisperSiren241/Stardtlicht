@@ -54,7 +54,7 @@ public class DialogueTrigger : MonoBehaviour
             else if (questState == QuestState.FINISHED)
             {
                 string lastSentence = dialogue.completionDialogue[dialogue.completionDialogue.Length - 1];
-                dialogueManager.ShowShortMessage(lastSentence, dialogue); // Отображение последней реплики
+                dialogueManager.ShowShortMessage(lastSentence, dialogue);
                 return;
             }
         }

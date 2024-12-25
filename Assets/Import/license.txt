@@ -1,11 +1,11 @@
 Model Information:
-* title:	Platform
-* source:	https://sketchfab.com/3d-models/platform-c274989766c344ac97817f77a046c0e0
-* author:	AlexBedrossian (https://sketchfab.com/AlexBedrossian)
+* title:	Glowing Magic Rock
+* source:	https://sketchfab.com/3d-models/glowing-magic-rock-2dcedc4619434d549b4ada36ee3f398b
+* author:	Ben Lebreux (https://sketchfab.com/ben.lebreux)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Platform" (https://sketchfab.com/3d-models/platform-c274989766c344ac97817f77a046c0e0) by AlexBedrossian (https://sketchfab.com/AlexBedrossian) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Glowing Magic Rock" (https://sketchfab.com/3d-models/glowing-magic-rock-2dcedc4619434d549b4ada36ee3f398b) by Ben Lebreux (https://sketchfab.com/ben.lebreux) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
