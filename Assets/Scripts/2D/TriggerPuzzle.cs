@@ -43,5 +43,7 @@ public class TriggerPuzzle : MonoBehaviour, IDataPersistenceManager
             Destroy(puzzleCanvas);
         }
     }
-    public void SaveData(GameData data) { }
+    public void SaveData(GameData data) { 
+        
+    }
 }
